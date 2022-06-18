@@ -1,0 +1,1 @@
+openssl genrsa -aes256 -out indienote-rootca.key 2048

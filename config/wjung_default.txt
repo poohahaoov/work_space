@@ -1,0 +1,17 @@
+wjung_default
+fpr_docker_compose_default
+pytorch-universal-docker-template_default
+fpr_default
+nlst_survival_2021_default
+
+
+
+
+ifconfig br-32160dbffdb7 down
+ifconfig br-0500d2d1b151 down
+ifconfig br-56e1d4c53c57 down
+ifconfig br-59a99ddf10a6 down
+ifconfig br-d8a68e2d0dc2 down
+ifconfig br-a5cbbf47300a down
+ifconfig br-fbb1078ad890 down
+ifconfig br-8210d97de44b down

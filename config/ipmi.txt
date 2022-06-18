@@ -1,0 +1,13 @@
+#!/bin/bash
+ipmitool lan set 1 ipsrc static 
+ipmitool lan set 1 ipaddr 172.31.255.19
+ipmitool lan set 1 netmask 255.255.255.0
+ipmitool lan set 1 defgw ipaddr 172.31.255.254
+ipmitool lan set 1 access on
+ipmitool mc reset cold
+
+ipmi_devintf ipmi_ssif ipmi_msghandler ipmi_si pmi_msghandler acpi_ipmi
+
+
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f5f62a6d730>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /numba/
+

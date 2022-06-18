@@ -1,0 +1,16 @@
+docker install
+
+apt 
+
+
+apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+apt-get install docker-ce=5:19.03.14~3-0~ubuntu-bionic docker-ce-cli=5:19.03.14~3-0~ubuntu-bionic containerd.io
+
+apt-get install docker-ce=5:20.10.8~3-0~ubuntu-bionic  docker-ce-cli=5:20.10.8~3-0~ubuntu-bionic containerd.io
+
+docker compose 
+https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker exec -it  c456623003b1 /bin/bash

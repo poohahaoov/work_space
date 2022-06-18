@@ -1,0 +1,5 @@
+docker bridge
+
+
+f36643c7b7fb   rads-veritas_default                   bridge    local
+25d9ce561a9d   cxr-dev-2022_default                   bridge    local

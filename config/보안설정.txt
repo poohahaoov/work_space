@@ -1,0 +1,85 @@
+#보안설정
+
+
+1.1 패스워드 복잡도
+    A.패스워드 복잡도 설정이 적용되었는가?
+        apt-get -y install libpam-pwquality
+        vi /etc/pam.d/common-password
+        line 25 구문 추가 minlen=8 minclass=3
+    B. 패스워드 최대 사용기간이 설정되었는가?
+        cat /etc/login.defs | grep -i PASS_MIN_LEN
+        PASS_MIN_LEN    8
+    
+1.2 패스워드 보안설정
+    A. 패스워드 최근 암호 기억이 설정되었는가?
+        echo 'password    requisite                        pam_pwhistory.so remember=2' >> /etc/pam.d/common-password
+    B. 패스워드 최대 사용기간이 설정되었는가?
+        cat /etc/login.defs | grep -i PASS_MAX_DAYS
+        PASS_MAX_DAYS   90 << 출력 확인
+    C. 패스워드 최소 사용기간이 설정되었는가?
+        cat /etc/login.defs | grep -i PASS_MIN_DAYS
+        PASS_MIN_DAYS   7 << 출력 확인
+
+1.3 패스워드 잠금 정책에 대한 보안설정이 적용되었는가?
+    A. 계정 잠금 임계값이 설정되었는가?
+        echo 'auth    required                        pam_tally.so deny=4 unlock_time=1800 no_magic_root' >> /etc/pam.d/common-auth
+
+1.4
+    A. 사용자 계정, 그룹 리스트 정보 파일에 대한 접근 권한이 제한되어 있는가?
+        ls -al /etc/passwd /etc/group
+    B. 사용자 계정 암호 파일에 대한 접근 권한이 제한되어 있는가?
+        chmod 400 /etc/shadow
+        cat /etc/passwd
+
+    C. /etc/hosts 파일에 대한 접근 권한이 제한되어 있는가?
+        ls -l /etc/hosts
+    D. /etc/services  파일에 대한 접근 권한이 제한되어 있는가?
+        ls -l /etc/services
+    E. 일반 사용자가 중요 명령어를 실행하지 못하도록  설정되었는가?
+        ls -l /usr/bin/last
+        chmod 700 /usr/bin/last
+    F. 사용자 환경 설정 파일에 대한 접근 권한이 제한되어 있는가?
+        ls -al /etc/profile
+        chmod 755 /etc/profile
+    G. 네트워크 서비스 설정 파일에 대한 접근 권한이 제한되어 있는가?
+        슈퍼데몬 X
+        ls -l /etc/netplan/00-installer-config.yaml
+        chmod 600 etc/netplan/00-installer-config.yaml
+    H. FTP 접근제어 파일에 대한 접근 권한이 제한되어 있는가?
+        미사용
+    I. NFS 설정 파일에 대한 접근 권한이 제한되어 있는가?
+        미사용
+    J. 패스워드 규칙 설정 파일에 대한 접근 권한이 제한되어 있는가?
+        ls -l /etc/pam.d/common-password
+    K. cron 설정 파일에 대한 접근 권한이 제한되어 있는가?
+        ls -l /etc/cron.*
+        미사용
+    L. 주요 백업 파일 접근 권한이 제한되어 있는가?
+        없음
+    
+1.5 접근 권한 부여를 위한 기반 보안 설정이 적용되어 있는가?
+    A. root 계정의 UMASK 설정은 적절한가?
+        umask
+        0022
+    B. 일반 계정의 umask 설정이 적절한가?
+        umask
+        0002
+
+    C. root계정의 원격접속은 제한되어 있는가?
+        vi /etc/ssh/sshd_config
+
+1.6 일정 기간 미입력 시 Session Timeout 을 적용하고 있는가?
+    A. Session Timeout을 적용하고 있는가?
+        echo export TMOUT=1800 >> /etc/profile
+        echo export TMOUT=1800 >> $HOME/.bashrc
+
+       [Security warnings]
+Connected to a computer network without permission or unreasonable manner, the computer system to delete the data,
+Change, will be prosecuted by the national laws and regulations Any person who spills.
+
+
+[요청] 삼성병원 DeepCARS 제품 보안 적용 요청
+
+요청자: 생체신호개발팀/이상일
+Server: 삼성병원 DeepCARS 제품
+요청내용: 보안 설정 적용요청

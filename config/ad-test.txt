@@ -1,0 +1,36 @@
+#/bin/bash
+
+# hosts 파일 구성
+vi /etc/hosts
+10.30.1.4 dc.vuno.co
+10.30.1.5 dc.vuno.co
+
+# 패키지 설치
+apt-get update
+apt-get install krb5 samba sssd sssd-tools libnss-sss libpam-sss ntpdate realmd adcli
+
+# 시간동기화
+vi /etc/chrony/chrony.conf
+server dc.vuno.co iburst
+
+systemctl stop ntp
+ntpdate dc.vuno.co
+systemctl start ntp
+
+
+# VM domain join
+realm discover DC.VUNO.CO
+kinit -V kwanghyuk.jin@DC.VUNO.CO
+klist
+realm join --verbose DC.VUNO.CO -U 'kwanghyuk.jin@DC.VUNO.CO' --install=/
+
+nslookup dc.vuno.co
+kinit kwanghyuk.jin@vuno.co
+
+
+# sssd restart
+systemctl restart sssd
+
+ipmitool sdr type "Power Supply"
+ipmitool dcmi power reading
+ipmitool fru print
